@@ -1,19 +1,18 @@
-#include "pico_explorer.hpp"
-#include "drivers/st7789/st7789.hpp"
-#include "libraries/pico_graphics/pico_graphics.hpp"
+#include "pico/binary_info.h"
+#include "pico/stdlib.h"
 
-using namespace pimoroni;
-
-ST7789 st7789(PicoExplorer::WIDTH, PicoExplorer::HEIGHT, ROTATE_0, false, get_spi_pins(BG_SPI_FRONT));
-PicoGraphics_PenRGB332 graphics(st7789.width, st7789.height, nullptr);
+const uint LED_PIN = 25;
 
 int main() {
-    graphics.set_pen(255, 0, 0);
+  bi_decl(bi_program_description("First Blink"));
+  bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
 
-    while(true) {
-        graphics.pixel(Point(0, 0));
-
-        // now we've done our drawing let's update the screen
-        st7789.update(&graphics);
-    }
+  gpio_init(LED_PIN);
+  gpio_set_dir(LED_PIN, GPIO_OUT);
+  while (1) {
+    gpio_put(LED_PIN, 0);
+    sleep_ms(250);
+    gpio_put(LED_PIN, 1);
+    sleep_ms(250);
+  }
 }
