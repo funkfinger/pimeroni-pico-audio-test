@@ -1,6 +1,7 @@
 {
   "cmake.configureSettings": {
-    "PICO_SDK_PATH": "~/Documents/Projects/pico/pico-sdk"
+    "PICO_SDK_PATH": "~/Documents/Projects/pico/pico-sdk",
+    "PICO_EXTRAS_PATH": "~/Documents/Projects/pico/pico-extras"
   },
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
   "cmake.environment": {

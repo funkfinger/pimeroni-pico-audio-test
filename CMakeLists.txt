@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Change your executable name to something creative!
-set(NAME blink)
+set(NAME audio)
 
 include(pimoroni_pico_import.cmake)
 include(pico_sdk_import.cmake)
+include(pico_extras_import.cmake)
 
 # Gooey boilerplate
 project(${NAME} C CXX ASM)
@@ -16,7 +17,10 @@ pico_sdk_init()
 
 # Add your source files
 add_executable(${NAME}
-    main.cpp # <-- Add source files here!
+    demo.cpp
+    synth.cpp
+    synth.hpp
+    audio.hpp
 )
 
 # Include required libraries
@@ -26,7 +30,14 @@ add_executable(${NAME}
 # Don't forget to link the libraries you need!
 target_link_libraries(${NAME}
     pico_stdlib
-    pico_binary_info
+    pico_audio_i2s
+)
+
+target_compile_definitions(audio PRIVATE
+# compile time configuration of I2S
+PICO_AUDIO_I2S_MONO_INPUT=1
+#define for our example code
+USE_AUDIO_I2S=1
 )
 
 # create map/bin/hex file etc.
