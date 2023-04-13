@@ -17,10 +17,10 @@ pico_sdk_init()
 
 # Add your source files
 add_executable(${NAME}
-    demo.cpp
-    synth.cpp
-    synth.hpp
-    audio.hpp
+    src/demo.cpp
+    src/synth.cpp
+    src/synth.hpp
+    src/audio.hpp
 )
 
 # Include required libraries
